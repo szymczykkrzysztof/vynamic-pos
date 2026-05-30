@@ -1,0 +1,148 @@
+/* Cart.module.css */
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border-left: 1px solid var(--color-border-muted);
+    overflow: hidden;
+}
+
+/* ─── Header ─────────────────────────────────────────── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) var(--space-5) var(--space-4);
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink);
+}
+
+.count {
+    font-family: var(--font-mono), sans-serif;
+    font-size: 11px;
+    background: var(--color-ink);
+    color: var(--color-accent-fg);
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-full);
+}
+
+/* ─── Empty state ────────────────────────────────────── */
+.empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    color: var(--color-ink-disabled);
+    font-size: 13px;
+}
+
+.emptyIcon {
+    font-size: 32px;
+    opacity: 0.4;
+}
+
+/* ─── Items ──────────────────────────────────────────── */
+.items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.items::-webkit-scrollbar {
+    width: 3px;
+}
+
+.items::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.items::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+}
+
+/* ─── Footer ─────────────────────────────────────────── */
+.footer {
+    padding: var(--space-4) var(--space-5) var(--space-5);
+    flex-shrink: 0;
+}
+
+.divider {
+    height: 0.5px;
+    background: var(--color-border-muted);
+    margin-bottom: var(--space-3);
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-1);
+}
+
+.summaryLabel {
+    font-size: 12px;
+    color: var(--color-ink-tertiary);
+}
+
+.summaryValue {
+    font-family: var(--font-mono) sans-serif;
+    font-size: 12px;
+    color: var(--color-ink-secondary);
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.totalLabel {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-ink);
+}
+
+.totalValue {
+    font-family: var(--font-mono) sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-ink);
+}
+
+/* ─── Pay button ─────────────────────────────────────── */
+.payBtn {
+    width: 100%;
+    padding: 14px;
+    background: var(--color-ink);
+    color: var(--color-accent-fg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: opacity 0.15s;
+}
+
+.payBtn:hover:not(:disabled) {
+    opacity: 0.85;
+}
+
+.payBtn:disabled {
+    background: var(--color-border);
+    color: var(--color-ink-tertiary);
+    cursor: not-allowed;
+}

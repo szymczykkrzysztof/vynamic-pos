@@ -1,0 +1,14 @@
+
+.layout {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    overflow: hidden;
+}
+
