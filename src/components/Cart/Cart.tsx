@@ -6,7 +6,6 @@ interface Props {
     onIncreaseCartItem: (productId: number) => void
     onDecreaseCartItem: (productId: number) => void
     onRemoveFromCart: (productId: number) => void
-    onPay: () => void
     onGoToCart: () => void
 }
 
@@ -15,7 +14,6 @@ export const Cart = ({
                          onIncreaseCartItem,
                          onDecreaseCartItem,
                          onRemoveFromCart,
-                         onPay,
                          onGoToCart
                      }: Props) => {
     const netto = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -66,14 +64,7 @@ export const Cart = ({
                     disabled={cartItems.length === 0}
                     onClick={onGoToCart}
                 >
-                    Zobacz koszyk →
-                </button>
-                <button
-                    className={`${styles.payBtn} ${styles.payBtnSecondary}`}
-                    disabled={cartItems.length === 0}
-                    onClick={onPay}
-                >
-                    Zapłać →
+                    Przejrzyj koszyk →
                 </button>
             </div>
         </div>

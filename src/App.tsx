@@ -76,7 +76,6 @@ function App() {
                         onIncreaseCartItem={handleInreaseQuantity}
                         onDecreaseCartItem={handleDecreaseQuantity}
                         onRemoveFromCart={handleRemoveFromBasket}
-                        onPay={handlePay}
                         onGoToCart={() => setView('cart')}
                     />
                 </div>
