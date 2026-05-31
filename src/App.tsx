@@ -1,5 +1,4 @@
-import products, {type Product} from "./constants/products";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Header} from './components/Header/Header'
 import styles from './App.module.css'
 import {ProductList} from "./components/Product/ProductList.tsx";
@@ -7,13 +6,32 @@ import {Cart} from "./components/Cart/Cart.tsx";
 import type {CartItem} from "./components/Cart/CartItem.tsx";
 import {Confirmation} from "./components/Confirmation/Confirmation.tsx";
 import {CartDetail} from "./components/Cart/CartDetail.tsx";
+import type {Product} from "./constants/products.ts";
+import {ErrorBanner} from "./components/ErrorBanner/ErrorBanner.tsx";
 
 type View = 'pos' | 'cart' | 'confirmation'
+const API_URL = 'https://vynamic-pos-api.onrender.com'
 
 function App() {
+    const [products, setProducts] = useState<Product[]>([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
     const [basket, setBasket] = useState<CartItem[]>([]);
     const [lastOrder, setLastOrder] = useState<CartItem[]>([])
     const [view, setView] = useState<View>('pos')
+
+    useEffect(() => {
+        fetch(`${API_URL}/api/products`)
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data)
+                setLoading(false)
+            })
+            .catch(() => {
+                setError('Nie udało się załadować produktów')
+                setLoading(false)
+            })
+    }, [])
 
     const handleAddToBasket = (newProduct: Product) => {
         const existingItem = basket.find((item) => item.id === newProduct.id);
@@ -34,7 +52,7 @@ function App() {
     const handleRemoveFromBasket = (productId: number) => {
         setBasket((prev) => prev.filter((item) => item.id !== productId));
     }
-    const handleInreaseQuantity = (productId: number) => {
+    const handleIncreaseQuantity = (productId: number) => {
         const existingItem = basket.find((item) => item.id === productId);
         if (existingItem) {
             setBasket((prev) =>
@@ -65,25 +83,38 @@ function App() {
         setBasket([])
         setView('confirmation')
     }
+
     return (
         <div className={styles.layout}>
             <Header/>
-            {view === 'pos' && (
+            {loading && (
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 14,
+                    color: '#9CA3AF'
+                }}>
+                    Trwa nawiązywanie połączenia z serwerem...
+                </div>
+            )}
+            {error && <ErrorBanner message={error}/>}
+            {!loading && !error && view === 'pos' && (
                 <div className={styles.body}>
                     <ProductList products={products} onAddToBasket={handleAddToBasket}/>
                     <Cart
                         cartItems={basket}
-                        onIncreaseCartItem={handleInreaseQuantity}
+                        onIncreaseCartItem={handleIncreaseQuantity}
                         onDecreaseCartItem={handleDecreaseQuantity}
                         onRemoveFromCart={handleRemoveFromBasket}
                         onGoToCart={() => setView('cart')}
                     />
                 </div>
             )}
-            {view === 'cart' && (
+            {!loading && !error && view === 'cart' && (
                 <CartDetail
                     cartItems={basket}
-                    onIncreaseCartItem={handleInreaseQuantity}
+                    onIncreaseCartItem={handleIncreaseQuantity}
                     onDecreaseCartItem={handleDecreaseQuantity}
                     onRemoveFromCart={handleRemoveFromBasket}
                     onPay={handlePay}
