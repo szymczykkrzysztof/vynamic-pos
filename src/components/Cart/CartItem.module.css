@@ -7,7 +7,7 @@
   padding: var(--space-3);
   background: var(--color-surface-muted);
   border-radius: var(--radius-md);
-  border: 0.5px solid var(--color-border-light);
+  border: 1px solid var(--color-border-light);
   transition: border-color 0.15s;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .unitPrice {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), sans-serif;
   font-size: 11px;
   color: var(--color-ink-tertiary);
 }
@@ -62,7 +62,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 0.5px solid var(--color-border);
+  border: 1px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-ink-secondary);
   font-size: 14px;
@@ -83,7 +83,7 @@
 }
 
 .qtyNum {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono), serif;
   font-size: 12px;
   font-weight: 500;
   min-width: 18px;
@@ -96,7 +96,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 0.5px solid var(--color-border);
+  border: 1px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-ink-disabled);
   font-size: 12px;

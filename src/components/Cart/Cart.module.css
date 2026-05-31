@@ -79,7 +79,7 @@
 }
 
 .divider {
-    height: 0.5px;
+    height: 1px;
     background: var(--color-border-muted);
     margin-bottom: var(--space-3);
 }

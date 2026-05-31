@@ -16,7 +16,7 @@ export const Header = () => {
                 Vynamic POS
             </div>
             <div className={styles.topbarMeta}>
-                <span className={styles.topbarTime}>{date.toLocaleTimeString('pl-PL')}</span>
+                <span className={styles.topbarTime}>{date.toLocaleDateString('pl-PL')} : {date.toLocaleTimeString('pl-PL')}</span>
                 <span className={styles.topbarCashier}>Marian Paździoch</span>
             </div>
         </div>)
