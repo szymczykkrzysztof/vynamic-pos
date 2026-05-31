@@ -146,3 +146,10 @@
     color: var(--color-ink-tertiary);
     cursor: not-allowed;
 }
+
+.payBtnSecondary {
+    margin-top: 8px;
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-border);
+}

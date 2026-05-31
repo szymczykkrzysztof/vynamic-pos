@@ -17,7 +17,7 @@ export const Header = () => {
             </div>
             <div className={styles.topbarMeta}>
                 <span className={styles.topbarTime}>{date.toLocaleDateString('pl-PL')} : {date.toLocaleTimeString('pl-PL')}</span>
-                <span className={styles.topbarCashier}>Marian Paździoch</span>
+                <span className={styles.topbarCashier}>Kasjer: Marian Paździoch</span>
             </div>
         </div>)
 

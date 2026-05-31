@@ -5,10 +5,16 @@ import styles from './App.module.css'
 import {ProductList} from "./components/Product/ProductList.tsx";
 import {Cart} from "./components/Cart/Cart.tsx";
 import type {CartItem} from "./components/Cart/CartItem.tsx";
+import {Confirmation} from "./components/Confirmation/Confirmation.tsx";
+import {CartDetail} from "./components/Cart/CartDetail.tsx";
 
+type View = 'pos' | 'cart' | 'confirmation'
 
 function App() {
     const [basket, setBasket] = useState<CartItem[]>([]);
+    const [lastOrder, setLastOrder] = useState<CartItem[]>([])
+    const [view, setView] = useState<View>('pos')
+
     const handleAddToBasket = (newProduct: Product) => {
         const existingItem = basket.find((item) => item.id === newProduct.id);
 
@@ -54,17 +60,43 @@ function App() {
             handleRemoveFromBasket(productId);
         }
     }
+    const handlePay = () => {
+        setLastOrder(basket)
+        setBasket([])
+        setView('confirmation')
+    }
     return (
         <div className={styles.layout}>
             <Header/>
-            <div className={styles.body}>
-                <ProductList products={products} onAddToBasket={handleAddToBasket}/>
-                <Cart cartItems={basket}
-                      onIncreaseCartItem={handleInreaseQuantity}
-                      onDecreaseCartItem={handleDecreaseQuantity}
-                      onRemoveFromCart={handleRemoveFromBasket}
+            {view === 'pos' && (
+                <div className={styles.body}>
+                    <ProductList products={products} onAddToBasket={handleAddToBasket}/>
+                    <Cart
+                        cartItems={basket}
+                        onIncreaseCartItem={handleInreaseQuantity}
+                        onDecreaseCartItem={handleDecreaseQuantity}
+                        onRemoveFromCart={handleRemoveFromBasket}
+                        onPay={handlePay}
+                        onGoToCart={() => setView('cart')}
+                    />
+                </div>
+            )}
+            {view === 'cart' && (
+                <CartDetail
+                    cartItems={basket}
+                    onIncreaseCartItem={handleInreaseQuantity}
+                    onDecreaseCartItem={handleDecreaseQuantity}
+                    onRemoveFromCart={handleRemoveFromBasket}
+                    onPay={handlePay}
+                    onBack={() => setView('pos')}
                 />
-            </div>
+            )}
+            {view === 'confirmation' && (
+                <Confirmation
+                    order={lastOrder}
+                    onClose={() => setView('pos')}
+                />
+            )}
         </div>
     )
 }
