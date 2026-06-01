@@ -59,9 +59,9 @@ export const Confirmation = ({order, onClose}: Props) => {
                 </div>
 
                 <div className={styles.actions}>
-                    <button className={styles.btnSecondary} onClick={handlePrintReceipt} disabled={printed}>
+                    {!printed &&<button className={styles.btnSecondary} onClick={handlePrintReceipt} disabled={printed}>
                         Drukuj paragon
-                    </button>
+                    </button>}
                     <button className={styles.btnPrimary} onClick={onClose}>
                         Nowa transakcja →
                     </button>

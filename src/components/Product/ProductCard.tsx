@@ -14,8 +14,7 @@ const categoryStyles: Record<string, string> = {
 
 export const ProductCard = ({product, onAddToBasket}: Props) => {
     return (
-        <div className={styles.card}>
-            <button className={styles.addBtn} onClick={() => onAddToBasket(product)}>+</button>
+        <div className={styles.card} onClick={() => onAddToBasket(product)}>
             <span className={styles.emoji}>{product.emoji}</span>
             <div className={styles.name}>{product.name}</div>
             <span className={`${styles.categoryBadge} ${categoryStyles[product.category]}`}>
