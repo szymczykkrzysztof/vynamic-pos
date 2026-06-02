@@ -1,7 +1,9 @@
 import styles from './Header.module.css'
 import {useEffect, useState} from "react";
-
-export const Header = () => {
+interface Props {
+    cashierName:string
+}
+export const Header = ({cashierName}:Props) => {
     const [date, setDate] = useState(new Date())
     useEffect(() => {
         const interval = setInterval(() => {
@@ -17,7 +19,7 @@ export const Header = () => {
             </div>
             <div className={styles.topbarMeta}>
                 <span className={styles.topbarTime}>{date.toLocaleDateString('pl-PL')} : {date.toLocaleTimeString('pl-PL')}</span>
-                <span className={styles.topbarCashier}>Kasjer: Marian Paździoch</span>
+                <span className={styles.topbarCashier}>Kasjer: {cashierName}</span>
             </div>
         </div>)
 

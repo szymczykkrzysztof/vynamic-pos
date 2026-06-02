@@ -12,3 +12,11 @@
     overflow: hidden;
 }
 
+.loadingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #9CA3AF;
+    flex: 1;
+}

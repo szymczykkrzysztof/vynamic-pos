@@ -1,5 +1,4 @@
-import type {CartItem} from "./CartItem.tsx";
-import {CartItem as CartItemComponent} from "./CartItem.tsx";
+import {CartItem} from "./CartItem.tsx";
 import styles from './CartDetail.module.css'
 
 interface Props {
@@ -11,7 +10,14 @@ interface Props {
     onBack: () => void
 }
 
-export const CartDetail = ({cartItems, onIncreaseCartItem, onDecreaseCartItem, onRemoveFromCart, onPay, onBack}: Props) => {
+export const CartDetail = ({
+                               cartItems,
+                               onIncreaseCartItem,
+                               onDecreaseCartItem,
+                               onRemoveFromCart,
+                               onPay,
+                               onBack
+                           }: Props) => {
     const netto = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
     return (
@@ -28,7 +34,7 @@ export const CartDetail = ({cartItems, onIncreaseCartItem, onDecreaseCartItem, o
                     </div>
                     {cartItems.map(item => (
                         <div key={item.id} className={styles.itemRow}>
-                            <CartItemComponent
+                            <CartItem
                                 item={item}
                                 onIncreaseCartItem={onIncreaseCartItem}
                                 onDecreaseCartItem={onDecreaseCartItem}

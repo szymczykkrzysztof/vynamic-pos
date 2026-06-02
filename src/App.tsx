@@ -8,9 +8,9 @@ import {Confirmation} from "./components/Confirmation/Confirmation.tsx";
 import {CartDetail} from "./components/Cart/CartDetail.tsx";
 import type {Product} from "./constants/products.ts";
 import {ErrorBanner} from "./components/ErrorBanner/ErrorBanner.tsx";
+import {API_URL} from "./constants/constants.ts";
 
 type View = 'pos' | 'cart' | 'confirmation'
-const API_URL = 'https://vynamic-pos-api.onrender.com'
 
 function App() {
     const [products, setProducts] = useState<Product[]>([])
@@ -86,15 +86,9 @@ function App() {
 
     return (
         <div className={styles.layout}>
-            <Header/>
+            <Header cashierName={"Krzysztof Jarzyna"}/>
             {loading && (
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 14,
-                    color: '#9CA3AF'
-                }}>
+                <div className={styles.loadingContainer}>
                     Trwa nawiązywanie połączenia z serwerem...
                 </div>
             )}
