@@ -8,8 +8,9 @@ interface Props {
 }
 
 export const Confirmation = ({order, onClose}: Props) => {
-    const netto = order.reduce((sum, item) => sum + item.price * item.quantity, 0)
-    const brutto = netto * 1.23
+    const brutto = order.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    const netto = brutto / 1.23
+    const vat = brutto - netto
     const [printed, setPrinted] = useState(false)
     const handlePrintReceipt = () => {
         if (printed) return
@@ -47,7 +48,7 @@ export const Confirmation = ({order, onClose}: Props) => {
                     </div>
                     <div className={styles.receiptRow}>
                         <span>VAT 23%</span>
-                        <span className={styles.receiptVal}>{(netto * 0.23).toFixed(2)} zł</span>
+                        <span className={styles.receiptVal}>{vat.toFixed(2)} zł</span>
                     </div>
 
                     <div className={styles.receiptDivider}/>

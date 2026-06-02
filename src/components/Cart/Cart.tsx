@@ -16,7 +16,9 @@ export const Cart = ({
                          onRemoveFromCart,
                          onGoToCart
                      }: Props) => {
-    const netto = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    const brutto = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    const netto = brutto / 1.23
+    const vat = brutto - netto
     return (
         <div className={styles.panel}>
             <div className={styles.header}>
@@ -53,11 +55,11 @@ export const Cart = ({
                 </div>
                 <div className={styles.summaryRow}>
                     <span className={styles.summaryLabel}>VAT 23%</span>
-                    <span className={styles.summaryValue}>{(netto * 0.23).toFixed(2)} zł</span>
+                    <span className={styles.summaryValue}>{vat.toFixed(2)} zł</span>
                 </div>
                 <div className={styles.totalRow}>
                     <span className={styles.totalLabel}>Do zapłaty</span>
-                    <span className={styles.totalValue}>{(netto * 1.23).toFixed(2)} zł</span>
+                    <span className={styles.totalValue}>{brutto.toFixed(2)} zł</span>
                 </div>
                 <button
                     className={styles.payBtn}
