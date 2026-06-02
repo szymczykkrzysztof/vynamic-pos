@@ -17,7 +17,7 @@ A modern point-of-sale application built with React and TypeScript, inspired by 
 
 ## Tech Stack
 
-- **React 18** with TypeScript
+- **React 19** with TypeScript
 - **Vite** — build tool and dev server
 - **CSS Modules** — scoped component styles
 - **No external UI libraries** — custom components from scratch
@@ -77,7 +77,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## What I'd Add Next
 
-- Backend API (Node.js + Express) with `GET /api/products` and `POST /api/orders`
+- Backend API (Node.js + Express) with `GET /api/products` 
 - Product search by name
 - Cashier authentication (JWT)
 - Order history
