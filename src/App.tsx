@@ -21,16 +21,25 @@ function App() {
     const [view, setView] = useState<View>('pos')
 
     useEffect(() => {
-        fetch(`${API_URL}/api/products`)
-            .then(res => res.json())
+        const controller = new AbortController()
+
+        fetch(`${API_URL}/api/products`, { signal: controller.signal })
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`)
+                return res.json()
+            })
             .then(data => {
+                if (!Array.isArray(data)) throw new Error('Unexpected response shape')
                 setProducts(data)
-                setLoading(false)
+                setTimeout(() => setLoading(false), 0)
             })
-            .catch(() => {
+            .catch(err => {
+                if (err.name === 'AbortError') return
                 setError('Nie udało się załadować produktów')
-                setLoading(false)
+                setTimeout(() => setLoading(false), 0)
             })
+
+        return () => controller.abort()
     }, [])
 
     const handleAddToBasket = (newProduct: Product) => {
