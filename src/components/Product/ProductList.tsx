@@ -1,6 +1,6 @@
 import type {Product} from "../../constants/products.ts";
 import styles from './ProductList.module.css'
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {ProductCard} from "./ProductCard.tsx";
 import {SearchProduct} from "./SearchProduct.tsx";
 
@@ -12,15 +12,15 @@ interface Props {
 export const ProductList = ({products, onAddToBasket}: Props) => {
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredCategory, setFilteredCategory] = useState<string>('Wszystkie')
-    const getCategories = (products: Product[]) => {
+    const categories = useMemo(() => {
         const categories = products.map(product => product.category)
         return ['Wszystkie', ...new Set(categories)]
-    }
+    }, [products])
     return (
         <div className={styles.container}>
             <div className={styles.filters}>
                 <div className={styles.filtersLeft}>
-                    {getCategories(products).map((category) => (
+                    {categories.map((category) => (
                         <span key={category}
                               className={`${styles.filterPill} ${filteredCategory === category ? styles.filterPillActive : ''}`}
                               onClick={() => setFilteredCategory(category)}
